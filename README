@@ -1,3 +1,3 @@
 Various lock-based and lock-free algorithms tested for multiple readers and writers scenarios.
 
-The purpose is to show the performance differences of the approaches.
+The purpose is to show the performance of different approaches.
