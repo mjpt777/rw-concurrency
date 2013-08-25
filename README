@@ -1,1 +1,1 @@
-This file was created by IntelliJ IDEA 12.1.4 for binding GitHub repository
+Various lock based and lock-free algorithms tested for multiple readers and writers scenarios.
