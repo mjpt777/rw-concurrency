@@ -33,148 +33,25 @@
 
     <target name="test" depends="build">
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="0"/>
+            <jvmarg value="-server"/>
             <arg value="1"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="1"/>
-            <arg value="1"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="2"/>
-            <arg value="1"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="3"/>
-            <arg value="1"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="4"/>
-            <arg value="1"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="5"/>
-            <arg value="1"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="0"/>
+            <jvmarg value="-server"/>
             <arg value="2"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="1"/>
-            <arg value="2"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="2"/>
-            <arg value="2"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="3"/>
-            <arg value="2"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="4"/>
-            <arg value="2"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="5"/>
-            <arg value="2"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="0"/>
+            <jvmarg value="-server"/>
             <arg value="3"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="1"/>
-            <arg value="3"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="2"/>
-            <arg value="3"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="3"/>
-            <arg value="3"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="4"/>
-            <arg value="3"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="5"/>
-            <arg value="3"/>
-            <arg value="1"/>
-            <arg value="5000"/>
-        </java>
-
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="0"/>
-            <arg value="2"/>
-            <arg value="2"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="1"/>
-            <arg value="2"/>
-            <arg value="2"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="2"/>
-            <arg value="2"/>
-            <arg value="2"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="3"/>
-            <arg value="2"/>
-            <arg value="2"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="4"/>
-            <arg value="2"/>
-            <arg value="2"/>
-            <arg value="5000"/>
-        </java>
-        <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <arg value="5"/>
+            <jvmarg value="-server"/>
             <arg value="2"/>
             <arg value="2"/>
             <arg value="5000"/>

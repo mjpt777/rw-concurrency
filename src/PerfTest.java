@@ -4,8 +4,18 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PerfTest
 {
-    private static final long TEST_COOL_OFF_MS = 3000;
+    private static final long TEST_COOL_OFF_MS = 1000;
     private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
+
+    private static final Spaceship[] SPACESHIPS =
+    {
+        new SynchronizedSpaceship(),
+        new ReadWriteLockSpaceShip(),
+        new ReentrantLockSpaceship(),
+        new StampedLockSpaceship(),
+        new AtomicRefSpaceship(),
+        new UnsafeSpaceship(),
+    };
 
     private static int NUM_WRITERS;
     private static int NUM_READERS;
@@ -13,33 +23,23 @@ public class PerfTest
 
     public static void main(final String[] args) throws Exception
     {
-        final Spaceship spaceship = newInstance(Integer.parseInt(args[0]));
-        NUM_READERS = Integer.parseInt(args[1]);
-        NUM_WRITERS = Integer.parseInt(args[2]);
-        TEST_DURATION_MS = Long.parseLong(args[3]);
+        NUM_READERS = Integer.parseInt(args[0]);
+        NUM_WRITERS = Integer.parseInt(args[1]);
+        TEST_DURATION_MS = Long.parseLong(args[2]);
 
         for (int i = 0; i < 5; i++)
         {
-            Thread.sleep(TEST_COOL_OFF_MS);
-            perfRun(spaceship);
+            System.out.println("*** Run - " + i);
+            for (final Spaceship SPACESHIP : SPACESHIPS)
+            {
+                System.gc();
+                Thread.sleep(TEST_COOL_OFF_MS);
+
+                perfRun(SPACESHIP);
+            }
         }
 
         EXECUTOR.shutdown();
-    }
-
-    private static Spaceship newInstance(final int ordinal)
-    {
-        switch (ordinal)
-        {
-            case 0: return new SynchronizedSpaceship();
-            case 1: return new ReadWriteLockSpaceShip();
-            case 2: return new ReentrantLockSpaceship();
-            case 3: return new StampedLockSpaceship();
-            case 4: return new AtomicRefSpaceship();
-            case 5: return new UnsafeSpaceship();
-
-            default: throw new IllegalArgumentException(String.valueOf(ordinal));
-        }
     }
 
     public static void perfRun(final Spaceship spaceship) throws Exception
