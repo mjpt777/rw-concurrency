@@ -27,6 +27,7 @@
                nowarn="true">
             <src path="${dir.src}"/>
             <classpath  refid="test.classpath"/>
+            <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </target>
 
