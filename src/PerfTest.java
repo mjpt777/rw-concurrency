@@ -46,17 +46,17 @@ public class PerfTest
     {
         final Results results = new Results();
         final CyclicBarrier startBarrier = new CyclicBarrier(NUM_READERS + NUM_WRITERS + 1);
-        final CountDownLatch completionLatch = new CountDownLatch(NUM_READERS + NUM_WRITERS);
+        final CountDownLatch finishLatch = new CountDownLatch(NUM_READERS + NUM_WRITERS);
         final AtomicBoolean runningFlag = new AtomicBoolean(true);
 
         for (int i = 0; i < NUM_WRITERS; i++)
         {
-            EXECUTOR.execute(new WriterRunner(i, results, spaceship, runningFlag, startBarrier, completionLatch));
+            EXECUTOR.execute(new WriterRunner(i, results, spaceship, runningFlag, startBarrier, finishLatch));
         }
 
         for (int i = 0; i < NUM_READERS; i++)
         {
-            EXECUTOR.execute(new ReaderRunner(i, results, spaceship, runningFlag, startBarrier, completionLatch));
+            EXECUTOR.execute(new ReaderRunner(i, results, spaceship, runningFlag, startBarrier, finishLatch));
         }
 
         awaitBarrier(startBarrier);
@@ -64,7 +64,7 @@ public class PerfTest
         Thread.sleep(TEST_DURATION_MS);
         runningFlag.set(false);
 
-        completionLatch.await();
+        finishLatch.await();
 
         System.out.format("%d readers %d writers %22s %s\n",
                           NUM_READERS, NUM_WRITERS,
