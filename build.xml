@@ -27,31 +27,34 @@
                nowarn="true">
             <src path="${dir.src}"/>
             <classpath  refid="test.classpath"/>
-            <compilerarg value="-XDignore.symbol.file"/>
         </javac>
     </target>
 
     <target name="test" depends="build">
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
             <jvmarg value="-server"/>
+            <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="1"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
             <jvmarg value="-server"/>
+            <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="2"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
             <jvmarg value="-server"/>
+            <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="3"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
             <jvmarg value="-server"/>
+            <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="2"/>
             <arg value="2"/>
             <arg value="5000"/>

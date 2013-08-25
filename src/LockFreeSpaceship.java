@@ -1,6 +1,6 @@
 import java.util.concurrent.atomic.AtomicReference;
 
-public class AtomicRefSpaceship implements Spaceship
+public class LockFreeSpaceship implements Spaceship
 {
     private AtomicReference<Position> position = new AtomicReference<Position>(new Position(0, 0));
 
@@ -28,5 +28,32 @@ public class AtomicRefSpaceship implements Spaceship
         while (!position.compareAndSet(currentPosition, currentPosition.move(xDelta, yDelta)));
 
         return tries;
+    }
+
+    public static class Position
+    {
+        private final int x;
+        private final int y;
+
+        public Position(final int x, final int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX()
+        {
+            return x;
+        }
+
+        public int getY()
+        {
+            return y;
+        }
+
+        public Position move(final int xDelta, final int yDelta)
+        {
+            return new Position(x + xDelta, y + yDelta);
+        }
     }
 }

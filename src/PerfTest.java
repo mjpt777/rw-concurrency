@@ -13,8 +13,7 @@ public class PerfTest
         new ReadWriteLockSpaceShip(),
         new ReentrantLockSpaceship(),
         new StampedLockSpaceship(),
-        new AtomicRefSpaceship(),
-        new UnsafeSpaceship(),
+        new LockFreeSpaceship(),
     };
 
     private static int NUM_WRITERS;
