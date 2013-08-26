@@ -2,7 +2,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class LockFreeSpaceship implements Spaceship
 {
-    private AtomicReference<Position> position = new AtomicReference<Position>(new Position(0, 0));
+    private final AtomicReference<Position> position = new AtomicReference<Position>(new Position(0, 0));
 
     @Override
     public int readPosition(final int[] coordinates)
