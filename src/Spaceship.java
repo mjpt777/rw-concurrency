@@ -13,7 +13,7 @@ public interface Spaceship
     int readPosition(final int[] coordinates);
 
     /**
-     * Move the current position of the space by a delta to the x and y coordinates.
+     * Move the current position of the spaceship by a delta to the x and y coordinates.
      *
      * @param xDelta delta by which the spaceship should be moved in the x-axis.
      * @param yDelta delta by which the spaceship should be moved in the y-axis.
