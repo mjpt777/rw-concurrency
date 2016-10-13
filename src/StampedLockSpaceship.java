@@ -1,4 +1,4 @@
-import java.util.concurrent.locks.StampedLock;
+import jsr166e.StampedLock;
 
 public class StampedLockSpaceship implements Spaceship
 {
