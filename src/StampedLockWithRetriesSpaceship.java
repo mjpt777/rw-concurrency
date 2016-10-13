@@ -1,7 +1,8 @@
 import java.util.concurrent.locks.StampedLock;
 
-public class StampedLockSpaceship implements Spaceship
+public class StampedLockWithRetriesSpaceship implements Spaceship
 {
+    public static final int RETRIES = 5;
     private final StampedLock lock = new StampedLock();
 
     private int x;
@@ -10,26 +11,28 @@ public class StampedLockSpaceship implements Spaceship
     @Override
     public int readPosition(final int[] coordinates)
     {
-        int tries = 1;
-        long stamp = lock.tryOptimisticRead();
-
-        coordinates[0] = x;
-        coordinates[1] = y;
-
-        if (!lock.validate(stamp))
-        {
+        int tries = 0; long stamp;
+        for (int i = 0; i < RETRIES; i++) {
             ++tries;
+            stamp = lock.tryOptimisticRead();
 
-            stamp = lock.readLock();
-            try
-            {
-                coordinates[0] = x;
-                coordinates[1] = y;
+            coordinates[0] = x;
+            coordinates[1] = y;
+            if (lock.validate(stamp)) {
+                return tries;
             }
-            finally
-            {
-                lock.unlockRead(stamp);
-            }
+        }
+        ++tries;
+
+        stamp = lock.readLock();
+        try
+        {
+            coordinates[0] = x;
+            coordinates[1] = y;
+        }
+        finally
+        {
+            lock.unlockRead(stamp);
         }
 
         return tries;
