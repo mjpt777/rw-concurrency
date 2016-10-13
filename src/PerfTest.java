@@ -13,6 +13,7 @@ public class PerfTest
         new ReadWriteLockSpaceShip(),
         new ReentrantLockSpaceship(),
         new StampedLockSpaceship(),
+        new StampedLockWithRetriesSpaceship(),
         new LockFreeSpaceship(),
     };
 
