@@ -4,18 +4,18 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PerfTest
 {
-    private static final long TEST_COOL_OFF_MS = 1000;
+    private static final long TEST_COOL_OFF_MS = 10;
     private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
 
     private static final Spaceship[] SPACESHIPS =
-    {
-        new SynchronizedSpaceship(),
-        new ReadWriteLockSpaceShip(),
-        new ReentrantLockSpaceship(),
-        new StampedLockSpaceship(),
-        new StampedLockWithRetriesSpaceship(),
-        new LockFreeSpaceship(),
-    };
+        {
+            new SynchronizedSpaceship(),
+            new ReadWriteLockSpaceShip(),
+            new ReentrantLockSpaceship(),
+            new StampedLockSpaceship(),
+            new StampedLockWithRetriesSpaceship(),
+            new LockFreeSpaceship(),
+        };
 
     private static int NUM_WRITERS;
     private static int NUM_READERS;
@@ -42,7 +42,7 @@ public class PerfTest
         EXECUTOR.shutdown();
     }
 
-    public static void perfRun(final Spaceship spaceship) throws Exception
+    private static void perfRun(final Spaceship spaceship) throws Exception
     {
         final Results results = new Results();
         final CyclicBarrier startBarrier = new CyclicBarrier(NUM_READERS + NUM_WRITERS + 1);
@@ -66,13 +66,14 @@ public class PerfTest
 
         finishLatch.await();
 
-        System.out.format("%d readers %d writers %22s %s\n",
-                          NUM_READERS, NUM_WRITERS,
-                          spaceship.getClass().getSimpleName(),
-                          results);
+        System.out.format(
+            "%d readers %d writers %22s %s\n",
+            NUM_READERS, NUM_WRITERS,
+            spaceship.getClass().getSimpleName(),
+            results);
     }
 
-    public static void awaitBarrier(final CyclicBarrier barrier)
+    private static void awaitBarrier(final CyclicBarrier barrier)
     {
         try
         {
@@ -84,16 +85,15 @@ public class PerfTest
         }
     }
 
-    public static class Results
+    static class Results
     {
-        long[] reads = new long[NUM_READERS];
-        long[] moves = new long[NUM_WRITERS];
+        final long[] reads = new long[NUM_READERS];
+        final long[] moves = new long[NUM_WRITERS];
 
-        long[] readAttempts = new long[NUM_READERS];
-        long[] observedMoves = new long[NUM_READERS];
-        long[] moveAttempts = new long[NUM_WRITERS];
+        final long[] readAttempts = new long[NUM_READERS];
+        final long[] observedMoves = new long[NUM_READERS];
+        final long[] moveAttempts = new long[NUM_WRITERS];
 
-        @Override
         public String toString()
         {
             long totalReads = 0;
@@ -119,7 +119,7 @@ public class PerfTest
         }
     }
 
-    public static class WriterRunner implements Runnable
+    static class WriterRunner implements Runnable
     {
         private final int id;
         private final Results results;
@@ -128,8 +128,13 @@ public class PerfTest
         private final CyclicBarrier barrier;
         private final CountDownLatch latch;
 
-        public WriterRunner(final int id, final Results results, final Spaceship spaceship,
-                            final AtomicBoolean runningFlag, final CyclicBarrier barrier, final CountDownLatch latch)
+        WriterRunner(
+            final int id,
+            final Results results,
+            final Spaceship spaceship,
+            final AtomicBoolean runningFlag,
+            final CyclicBarrier barrier,
+            final CountDownLatch latch)
         {
             this.id = id;
             this.results = results;
@@ -139,7 +144,6 @@ public class PerfTest
             this.latch = latch;
         }
 
-        @Override
         public void run()
         {
             awaitBarrier(barrier);
@@ -161,7 +165,7 @@ public class PerfTest
         }
     }
 
-    public static class ReaderRunner implements Runnable
+    static class ReaderRunner implements Runnable
     {
         private final int id;
         private final Results results;
@@ -170,8 +174,13 @@ public class PerfTest
         private final CyclicBarrier barrier;
         private final CountDownLatch latch;
 
-        public ReaderRunner(final int id, final Results results, final Spaceship spaceship,
-                            final AtomicBoolean runningFlag, final CyclicBarrier barrier, final CountDownLatch latch)
+        ReaderRunner(
+            final int id,
+            final Results results,
+            final Spaceship spaceship,
+            final AtomicBoolean runningFlag,
+            final CyclicBarrier barrier,
+            final CountDownLatch latch)
         {
             this.id = id;
             this.results = results;
@@ -181,7 +190,6 @@ public class PerfTest
             this.latch = latch;
         }
 
-        @Override
         public void run()
         {
             awaitBarrier(barrier);

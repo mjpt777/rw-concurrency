@@ -8,7 +8,6 @@ public class ReentrantLockSpaceship implements Spaceship
     private int x;
     private int y;
 
-    @Override
     public int readPosition(final int[] coordinates)
     {
         lock.lock();
@@ -25,7 +24,6 @@ public class ReentrantLockSpaceship implements Spaceship
         return 1;
     }
 
-    @Override
     public int move(final int xDelta, final int yDelta)
     {
         lock.lock();

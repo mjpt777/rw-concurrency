@@ -2,9 +2,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class LockFreeSpaceship implements Spaceship
 {
-    private final AtomicReference<Position> position = new AtomicReference<Position>(new Position(0, 0));
+    private final AtomicReference<Position> position = new AtomicReference<>(new Position(0, 0));
 
-    @Override
     public int readPosition(final int[] coordinates)
     {
         final Position currentPosition = position.get();
@@ -14,7 +13,6 @@ public class LockFreeSpaceship implements Spaceship
         return 1;
     }
 
-    @Override
     public int move(final int xDelta, final int yDelta)
     {
         int tries = 0;
@@ -30,28 +28,28 @@ public class LockFreeSpaceship implements Spaceship
         return tries;
     }
 
-    public static class Position
+    static class Position
     {
         private final int x;
         private final int y;
 
-        public Position(final int x, final int y)
+        Position(final int x, final int y)
         {
             this.x = x;
             this.y = y;
         }
 
-        public int getX()
+        int getX()
         {
             return x;
         }
 
-        public int getY()
+        int getY()
         {
             return y;
         }
 
-        public Position move(final int xDelta, final int yDelta)
+        Position move(final int xDelta, final int yDelta)
         {
             return new Position(x + xDelta, y + yDelta);
         }

@@ -2,7 +2,7 @@
  * Interface to a concurrent representation of a ship that can move around
  * a 2 dimensional space with updates and reads performed concurrently.
  */
-public interface Spaceship
+interface Spaceship
 {
     /**
      * Read the position of the spaceship into the array of coordinates provided.

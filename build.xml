@@ -3,13 +3,9 @@
 
     <property name="dir.src" value="src"/>
     <property name="dir.build" value="target/classes"/>
-    <property name="dir.lib" value="lib"/>
 
     <path id="test.classpath">
         <pathelement location="${dir.build}"/>
-        <fileset dir="${dir.lib}">
-            <include name="*.jar"/>
-        </fileset>
     </path>
 
     <target name="prepare">
@@ -32,28 +28,24 @@
 
     <target name="test" depends="build">
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <jvmarg value="-server"/>
             <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="1"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <jvmarg value="-server"/>
             <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="2"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <jvmarg value="-server"/>
             <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="3"/>
             <arg value="1"/>
             <arg value="5000"/>
         </java>
         <java classname="PerfTest" classpathref="test.classpath" fork="true">
-            <jvmarg value="-server"/>
             <jvmarg value="-XX:BiasedLockingStartupDelay=0"/>
             <arg value="2"/>
             <arg value="2"/>

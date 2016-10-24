@@ -11,7 +11,6 @@ public class ReadWriteLockSpaceShip implements Spaceship
     private int x;
     private int y;
 
-    @Override
     public int readPosition(final int[] coordinates)
     {
         readLock.lock();
@@ -28,7 +27,6 @@ public class ReadWriteLockSpaceShip implements Spaceship
         return 1;
     }
 
-    @Override
     public int move(final int xDelta, final int yDelta)
     {
         writeLock.lock();

@@ -1,4 +1,4 @@
-import jsr166e.StampedLock;
+import java.util.concurrent.locks.StampedLock;
 
 public class StampedLockSpaceship implements Spaceship
 {
@@ -7,7 +7,6 @@ public class StampedLockSpaceship implements Spaceship
     private int x;
     private int y;
 
-    @Override
     public int readPosition(final int[] coordinates)
     {
         int tries = 1;
@@ -35,7 +34,6 @@ public class StampedLockSpaceship implements Spaceship
         return tries;
     }
 
-    @Override
     public int move(final int xDelta, final int yDelta)
     {
         final long stamp = lock.writeLock();
