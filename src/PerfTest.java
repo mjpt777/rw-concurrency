@@ -30,12 +30,12 @@ public class PerfTest
         for (int i = 0; i < 5; i++)
         {
             System.out.println("*** Run - " + i);
-            for (final Spaceship SPACESHIP : SPACESHIPS)
+            for (final Spaceship spaceship : SPACESHIPS)
             {
                 System.gc();
                 Thread.sleep(TEST_COOL_OFF_MS);
 
-                perfRun(SPACESHIP);
+                perfRun(spaceship);
             }
         }
 
@@ -67,7 +67,7 @@ public class PerfTest
         finishLatch.await();
 
         System.out.format(
-            "%d readers %d writers %22s %s\n",
+            "%d readers %d writers %22s %s%n",
             NUM_READERS, NUM_WRITERS,
             spaceship.getClass().getSimpleName(),
             results);

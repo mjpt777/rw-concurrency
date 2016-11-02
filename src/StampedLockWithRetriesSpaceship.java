@@ -10,14 +10,17 @@ public class StampedLockWithRetriesSpaceship implements Spaceship
 
     public int readPosition(final int[] coordinates)
     {
-        int tries = 0; long stamp;
-        for (int i = 0; i < RETRIES; i++) {
+        int tries = 0;
+        long stamp;
+        for (int i = 0; i < RETRIES; i++)
+        {
             ++tries;
             stamp = lock.tryOptimisticRead();
 
             coordinates[0] = x;
             coordinates[1] = y;
-            if (lock.validate(stamp)) {
+            if (lock.validate(stamp))
+            {
                 return tries;
             }
         }
